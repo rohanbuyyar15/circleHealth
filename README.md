@@ -1,1 +1,1 @@
-added teh edited files
+added the edited files
