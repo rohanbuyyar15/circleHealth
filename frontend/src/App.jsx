@@ -53,7 +53,26 @@ const EXAMPLE_SESSIONS = [
 ];
 
 export default function App(){
-  
+  const [playerName, setPlayerName] = useState('');
+  const [sessions, setSessions] = useState([]);
+
+ 
+  React.useEffect(() => {
+    const fetchSessions = async () => {
+      try {
+        const response = await fetch('/sessions');
+        const data = await response.json();
+        setSessions(data);
+      } catch (error) {
+        console.error('Error fetching sessions:', error);
+      }
+    };
+
+    fetchSessions();
+    const intervalId = setInterval(fetchSessions, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 }
 
 
